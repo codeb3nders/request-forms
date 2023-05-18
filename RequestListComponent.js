@@ -96,6 +96,7 @@ function RequestListComponent() {
           <TableCell
             style={{
               // paddingLeft: 15,
+              textTransform: "uppercase",
               width: 50,
               background: "#556cd6",
               color: "white",
@@ -107,6 +108,7 @@ function RequestListComponent() {
           {headCells.map((headCell) => (
             <TableCell
               style={{
+                textTransform: "uppercase",
                 paddingLeft: 15,
                 width: 100,
                 background: "#556cd6",
@@ -214,8 +216,10 @@ function RequestListComponent() {
   };
 
   const updateForm = (row, stage) => {
+    const systemName = user.systemName.map((x) => x).join(", ");
+    const systemCode = user.systemCode.map((x) => x).join(", ");
     let withDivider = false;
-    let message = "Requestor: Edit request in ";
+    let message = `Request for ${systemName} | ${systemCode} `;
     const cancelLabel = "Cancel";
     let submitLabel = "Submit";
     setRcr01FormFields((prev) => {
@@ -230,7 +234,8 @@ function RequestListComponent() {
       if (stage === 1) {
         withDivider = true;
         submitLabel = "Approve";
-        message = "QS: Approve request in ";
+        // message = "QS: Approve request in ";
+
         Object.assign(prev, rCR02FormFields);
         for (var key in prev) if (key.startsWith("rCR03")) delete prev[key];
         for (var key in prev) if (key.startsWith("rCR04")) delete prev[key];
@@ -239,7 +244,8 @@ function RequestListComponent() {
       if (stage === 2) {
         withDivider = true;
         submitLabel = "Approve";
-        message = "Accounting: Approve request in ";
+        // message = "Accounting: Approve request in ";
+
         Object.assign(prev, rCR03FormFields);
         for (var key in prev) if (key.startsWith("rCR02")) delete prev[key];
         for (var key in prev) if (key.startsWith("rCR04")) delete prev[key];
@@ -248,7 +254,8 @@ function RequestListComponent() {
       if (stage === 3) {
         withDivider = true;
         submitLabel = "Submit";
-        message = "Treasury: Approve request in ";
+        // message = "Treasury: Approve request in ";
+
         Object.assign(prev, rCR04FormFields);
         for (var key in prev) if (key.startsWith("rCR03")) delete prev[key];
         for (var key in prev) if (key.startsWith("rCR02")) delete prev[key];
@@ -281,7 +288,7 @@ function RequestListComponent() {
     context.setModalState({
       formModal: true,
       detailModal: false,
-      title: <RefNumber message={message} refNo={row.referenceNo} />,
+      title: <TitleValue message={message} refNo={row.referenceNo} />,
       buttonProps: {
         cancelLabel,
         submitLabel,
@@ -291,11 +298,18 @@ function RequestListComponent() {
     });
   };
 
-  const RefNumber = ({ message, refNo }) => {
+  const TitleValue = ({ message, refNo }) => {
     return (
-      <div style={{ padding: 5, background: "#556cd6", color: "white" }}>
+      <div
+        style={{
+          fontSize: 12,
+          padding: 5,
+          background: "#556cd6",
+          color: "white",
+        }}
+      >
         {message}
-        <span> {refNo}</span>
+        {/* <span> {refNo}</span> */}
       </div>
     );
   };
@@ -473,6 +487,9 @@ function RequestListComponent() {
                       tabIndex={-1}
                       key={index}
                       selected={isItemSelected}
+                      style={{
+                        textTransform: "capitalize",
+                      }}
                     >
                       <TableCell>{actionButtons(row)}</TableCell>
                       {Object.keys(headerLabels).map((item, index) => {
