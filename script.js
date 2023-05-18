@@ -1,20 +1,15 @@
 const SampleState = {
   user: {
-    "Name": "AGDAN, LIANI EMI PASCUAL ",
+    Name: "AGDAN, LIANI EMI PASCUAL ",
     "Email Address": "liani.agdan@vcdcph.com",
-    "Status": "ACTIVE",
+    Status: "ACTIVE",
     "System Name - ENV": "Employee Records - DEV",
     "System Code": "ERM-DEV",
-    "Access": [
-        "Approver-QS",
-        "hr-admin",
-        "Procurement",
-        "Requestor"
-    ],
-    "Location": "HEAD OFFICE",
+    Access: ["Approver-QS", "hr-admin", "Procurement", "Requestor"],
+    Location: "HEAD OFFICE",
     "Email (Manual Input)": "",
-    "Employee Company Email": "liani.agdan@vcdcph.com"
-},
+    "Employee Company Email": "liani.agdan@vcdcph.com",
+  },
   request: [
     {
       amount: "13144.00",
@@ -30,6 +25,8 @@ const SampleState = {
       rCR02DateApproved: "12/12/22",
       rCR02Remarks: "RCR-2 REMARS",
       rCR02Status: "approved",
+      rCR03Status: "approved",
+      rCR04Status: "pending",
       rFP: "SDFSFAS",
       referenceNo: "RCR.2023.000379",
       requestStatus: "",

@@ -24,7 +24,7 @@ const RCRForm = (props) => {
       "Description",
       "Description"
     );
-console.log("FORM FIELDS", rCR01FormFields)
+
   return (
     <ModalComponent buttonName={props.buttonName} title={props.title}>
       <FormComponent

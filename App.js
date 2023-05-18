@@ -1,4 +1,3 @@
-
 const ApplicationContext = createContext();
 const App = () => {
   const [state, dispatch] = useStore();
@@ -26,8 +25,6 @@ const App = () => {
     dispatch({ type: type, payload: parsedData });
     dispatch({ type: LOADING });
   };
-
-
 
   useEffect(() => {
     getUserAccess();
@@ -146,7 +143,7 @@ const App = () => {
     // );
 
     setData((prev) => {
-      return { ...prev, rCR01FormFieldsDefaults };
+      return { rCR01FormFieldsDefaults };
     });
   };
 
@@ -159,9 +156,9 @@ const App = () => {
     getAllData();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, stage) => {
     const { user } = state;
-    console.log({ user });
+
     if (validateAllFields(RCRSchema, data, setData)) return;
 
     let finalObj = {};
@@ -171,22 +168,22 @@ const App = () => {
       Object.assign(finalObj, { [i]: val });
     });
 
-    if (setAllowedAccess(user, ["approver-qs"])) {
+    if (stage === 1) {
       finalObj["rCR02Status"] = "Approved";
       finalObj["rCR02Approver"] = user["Company Email"];
       finalObj["rCR02DateApproved"] = new Date().toLocaleDateString();
-    } else if (setAllowedAccess(user, ["approver-acct"])) {
+    } else if (stage === 2) {
       finalObj["rCR03Status"] = "Approved";
       finalObj["rCR03Approver"] = user["Company Email"];
       finalObj["rCR03DateApproved"] = new Date().toLocaleDateString();
-    } else if (setAllowedAccess(user, ["treasury"])) {
+    } else if (stage === 3) {
       finalObj["rCR04Status"] = "Approved";
       finalObj["rCR04Approver"] = user["Company Email"];
       finalObj["rCR04DateApproved"] = new Date().toLocaleDateString();
     }
     console.log({ finalObj });
 
-    // google.script.run.withSuccessHandler(successResponse).saveData(finalObj);
+    google.script.run.withSuccessHandler(successResponse).saveData(finalObj);
 
     clearForm();
     setModalState({ formModal: false });
@@ -209,7 +206,7 @@ const App = () => {
     return <RCRForm buttonName="New Req" title="RCR Form" />;
   };
 
-  if(
+  if (
     state.user === undefined ||
     state.request === undefined ||
     state.variables === undefined ||
@@ -217,12 +214,12 @@ const App = () => {
     state.vendorsMaster === undefined ||
     state.disbursementAccounts === undefined
   ) {
-  return <SkeletonLoaders />
+    return <SkeletonLoaders />;
   }
 
-  console.log("USER", state.user)
-
-  if(state.user['Access'].length <= 0) return <Grid
+  if (state.user["Access"].length <= 0)
+    return (
+      <Grid
         container
         backgroundColor="#f5f5f5"
         spacing={2}
@@ -233,6 +230,7 @@ const App = () => {
           User not allowed!
         </Grid>
       </Grid>
+    );
 
   return (
     <ApplicationContext.Provider value={contextValue}>
@@ -245,5 +243,3 @@ const App = () => {
 };
 
 // TODO: remove all unused
-
-

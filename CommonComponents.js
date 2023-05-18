@@ -22,7 +22,7 @@ const FormComponent = ({
   handleSubmit,
 }) => {
   const context = useContext(ApplicationContext);
-  console.log({ context });
+
   const { modalState } = context;
   const fields = data;
 
@@ -247,7 +247,7 @@ const FormComponent = ({
         </Button>
         <Button
           style={{ margin: 10 }}
-          onClick={handleSubmit}
+          onClick={(e) => handleSubmit(e, modalState.stage)}
           variant="contained"
         >
           {modalState.buttonProps
@@ -266,9 +266,6 @@ const ModalComponent = ({ buttonName, title, children }) => {
     <div>
       <Modal
         open={!!context.modalState.formModal}
-        onClose={() =>
-          context.setModalState({ formModal: false, detailModal: false })
-        }
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

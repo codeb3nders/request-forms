@@ -113,40 +113,6 @@ const rCR01FormFieldsDefaults = {
   },
 };
 const rCR02FormFields = {
-  // rCR02Status: {
-  //   id: "rCR02Status",
-  //   value: "",
-  //   name: "rCR02Status",
-  //   label: "rCR02 Status",
-  //   placeholder: "rCR02 Status",
-  //   type: "select",
-  //   required: true,
-  //   properties: [
-  //     { label: "Pending", value: "pending" },
-  //     { label: "Approved", value: "approved" },
-  //   ],
-  // },
-
-  // rCR02Approver: {
-  //   id: "rCR02Approver",
-  //   value: "",
-  //   name: "rCR02Approver",
-  //   label: "rCR02 Approver",
-  //   placeholder: "rCR02 Approver",
-  //   type: "standard",
-  //   required: true,
-  // },
-
-  // rCR02DateApproved: {
-  //   id: "rCR02DateApproved",
-  //   value: "",
-  //   name: "rCR02DateApproved",
-  //   label: "rCR02 Date Approved",
-  //   placeholder: "rCR02 Date Approved",
-  //   type: "date",
-  //   required: true,
-  // },
-
   rCR02Remarks: {
     id: "rCR02Remarks",
     value: "",
@@ -159,39 +125,6 @@ const rCR02FormFields = {
 };
 
 const rCR03FormFields = {
-  // rCR03Status: {
-  //   id: "rCR03Status",
-  //   value: "",
-  //   name: "rCR03Status",
-  //   label: "rCR03 Status",
-  //   placeholder: "rCR02 Status",
-  //   required: true,
-  //   properties: [
-  //     { label: "Pending", value: "pending" },
-  //     { label: "Approved", value: "approved" },
-  //   ],
-  // },
-
-  // rCR03Approver: {
-  //   id: "rCR03Approver",
-  //   value: "",
-  //   name: "rCR03Approver",
-  //   label: "rCR03 Approver",
-  //   placeholder: "rCR03 Approver",
-  //   type: "standard",
-  //   required: true,
-  // },
-
-  // rCR03DateApproved: {
-  //   id: "rCR03DateApproved",
-  //   value: "",
-  //   name: "rCR03DateApproved",
-  //   label: "rCR03 Date Approved",
-  //   placeholder: "rCR03 Date Approved",
-  //   type: "date",
-  //   required: true,
-  // },
-
   rCR03Remarks: {
     id: "rCR03Remarks",
     value: "",

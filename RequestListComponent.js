@@ -16,8 +16,6 @@ function RequestListComponent() {
     (row) => row.submittedBy === 'user["Company Email"]'
   );
 
-
-
   const rows = setAllowedAccess(state.user, [
     APPROVER_QS,
     APPROVER_ACTG,
@@ -215,7 +213,7 @@ function RequestListComponent() {
     setDense(event.target.checked);
   };
 
-  const updateForm = (row) => {
+  const updateForm = (row, stage) => {
     let withDivider = false;
     let message = "Requestor: Edit request in ";
     const cancelLabel = "Cancel";
@@ -229,25 +227,38 @@ function RequestListComponent() {
           prev[item].disabled = true;
         }
       });
-      if (setAllowedAccess(state.user, [APPROVER_QS])) {
+      if (stage === 1) {
         withDivider = true;
         submitLabel = "Approve";
         message = "QS: Approve request in ";
         Object.assign(prev, rCR02FormFields);
+        for (var key in prev) if (key.startsWith("rCR03")) delete prev[key];
+        for (var key in prev) if (key.startsWith("rCR04")) delete prev[key];
       }
 
-      if (setAllowedAccess(state.user, [APPROVER_ACTG, HR_ADMIN])) {
+      if (stage === 2) {
         withDivider = true;
         submitLabel = "Approve";
         message = "Accounting: Approve request in ";
         Object.assign(prev, rCR03FormFields);
+        for (var key in prev) if (key.startsWith("rCR02")) delete prev[key];
+        for (var key in prev) if (key.startsWith("rCR04")) delete prev[key];
       }
 
-      if (setAllowedAccess(state.user, [TREASURY])) {
+      if (stage === 3) {
         withDivider = true;
         submitLabel = "Submit";
         message = "Treasury: Approve request in ";
         Object.assign(prev, rCR04FormFields);
+        for (var key in prev) if (key.startsWith("rCR03")) delete prev[key];
+        for (var key in prev) if (key.startsWith("rCR02")) delete prev[key];
+      }
+
+      if (stage === 0) {
+        Object.assign(prev, rCR04FormFields);
+        for (var key in prev) if (key.startsWith("rCR03")) delete prev[key];
+        for (var key in prev) if (key.startsWith("rCR02")) delete prev[key];
+        for (var key in prev) if (key.startsWith("rCR04")) delete prev[key];
       }
 
       return {
@@ -276,6 +287,7 @@ function RequestListComponent() {
         submitLabel,
       },
       withDivider,
+      stage,
     });
   };
 
@@ -294,15 +306,21 @@ function RequestListComponent() {
 
     const rcr03BtnDisabled =
       row.rCR03Status && row.rCR03Status.trim().toLowerCase() === "approved";
+
+    const rcr04BtnDisabled =
+      row.rCR04Status && row.rCR04Status.trim().toLowerCase() === "approved";
+
     const btn = (stage) => {
       if (stage === 1) {
         return (
-          <Tooltip title={!rcr02BtnDisabled ? "To be approve  by QS" : "Approved"}>
+          <Tooltip
+            title={!rcr02BtnDisabled ? "To be approve  by QS" : "Approved"}
+          >
             <span>
               <IconButton
                 disabled={rcr02BtnDisabled}
                 color="warning"
-                onClick={() => updateForm(row)}
+                onClick={() => updateForm(row, 1)}
               >
                 <span className="material-icons">task_alt</span>
               </IconButton>
@@ -311,23 +329,39 @@ function RequestListComponent() {
         );
       } else if (stage === 2) {
         return (
-          <Tooltip
-            title={
-              rcr02BtnDisabled ? "To be approve by None QS" : "Not yet approve by QS"
-            }
-          >
+          <Tooltip title={rcr03BtnDisabled ? "Approved" : "Click to Approve"}>
             <span>
               <IconButton
-                disabled={!rcr02BtnDisabled && !rcr02BtnDisabled}
+                disabled={!rcr02BtnDisabled || rcr03BtnDisabled}
                 color="primary"
-                onClick={() => updateForm(row)}
+                onClick={() => updateForm(row, 2)}
               >
                 <span className="material-icons">task_alt</span>
               </IconButton>
             </span>
           </Tooltip>
         );
-      } else if (stage) {
+      } else if (stage === 3) {
+        return (
+          <Tooltip
+            title={
+              rcr02BtnDisabled
+                ? "To be approve by Treasury/Admin"
+                : "Not yet approve"
+            }
+          >
+            <span>
+              <IconButton
+                disabled={!rcr03BtnDisabled || rcr04BtnDisabled}
+                color="success"
+                onClick={() => updateForm(row, 3)}
+              >
+                <span className="material-icons">task_alt</span>
+              </IconButton>
+            </span>
+          </Tooltip>
+        );
+      } else if (stage === 0) {
         return (
           <Tooltip
             title={
@@ -340,7 +374,7 @@ function RequestListComponent() {
               <IconButton
                 disabled={rcr02BtnDisabled}
                 color="primary"
-                onClick={() => updateForm(row, 'edit  ')}
+                onClick={() => updateForm(row, 0)}
               >
                 <span className="material-icons">edit</span>
               </IconButton>
@@ -360,9 +394,10 @@ function RequestListComponent() {
             <span className="material-icons">launch</span>
           </IconButton>
         </Tooltip>
+        {setAllowedAccess(user, [REQUESTOR]) && btn(0)}
         {setAllowedAccess(user, [APPROVER_QS]) && btn(1)}
         {setAllowedAccess(user, [APPROVER_ACTG, HR_ADMIN, TREASURY]) && btn(2)}
-        {setAllowedAccess(user, [REQUESTOR]) && btn(3)}
+        {setAllowedAccess(user, [APPROVER_ACTG, HR_ADMIN, TREASURY]) && btn(3)}
       </Stack>
     );
   };
