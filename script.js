@@ -1,3 +1,66 @@
+const userAccess = [
+  {
+    Name: "AGDAN, LIANI EMI PASCUAL ",
+    "Email Address": "liani.agdan@vcdcph.com",
+    Status: "ACTIVE",
+    "System Name - ENV": "Employee Records - DEV",
+    "System Code": "ERM-DEV",
+    Access: "HR-Admin",
+    Location: "HEAD OFFICE",
+    "Email (Manual Input)": "",
+    "Employee Company Email": "liani.agdan@vcdcph.com",
+  },
+  {
+    Name: "AGDAN, LIANI EMI PASCUAL ",
+    "Email Address": "liani.agdan@vcdcph.com",
+    Status: "ACTIVE",
+    "System Name - ENV": "Request Monitoring - DEV",
+    "System Code": "EMS-DEV",
+    Access: "Procurement",
+    Location: "HEAD OFFICE",
+    "Email (Manual Input)": "",
+    "Employee Company Email": "liani.agdan@vcdcph.com",
+  },
+  {
+    Name: "AGDAN, LIANI EMI PASCUAL ",
+    "Email Address": "liani.agdan@vcdcph.com",
+    Status: "ACTIVE",
+    "System Name - ENV": "Treasury Monitoring System - DEV",
+    "System Code": "TMS-DEV",
+    Access: "Requestor",
+    Location: "HEAD OFFICE",
+    "Email (Manual Input)": "",
+    "Employee Company Email": "liani.agdan@vcdcph.com",
+  },
+  {
+    Name: "AGDAN, LIANI EMI PASCUAL ",
+    "Email Address": "liani.agdan@vcdcph.com",
+    Status: "INACTIVE",
+    "System Name - ENV": "Request Monitoring",
+    "System Code": "EMS-PROD",
+    Access: "View-ONLY",
+    Location: "HEAD OFFICE",
+    "Email (Manual Input)": "",
+    "Employee Company Email": "liani.agdan@vcdcph.com",
+  },
+];
+
+let sysName = [];
+let sysCode = [];
+let accessCode = [];
+
+const access = userAccess.forEach((rec) => {
+  const status = rec["Status"].toLowerCase() === "active";
+  const env = rec["System Name - ENV"].toLowerCase() !== "";
+  const code = rec["System Code"].toLowerCase() !== "";
+
+  if (status && env && code) {
+    sysName.push(rec["System Name - ENV"]);
+    sysCode.push(rec["System Code"]);
+    accessCode.push(rec["Access"]);
+  }
+});
+
 const SampleState = {
   user: {
     Name: "AGDAN, LIANI EMI PASCUAL ",
@@ -5,10 +68,18 @@ const SampleState = {
     Status: "ACTIVE",
     "System Name - ENV": "Employee Records - DEV",
     "System Code": "ERM-DEV",
-    Access: ["Approver-QS", "hr-admin", "Procurement", "Requestor"],
+    Access: "HR-Admin",
     Location: "HEAD OFFICE",
     "Email (Manual Input)": "",
     "Employee Company Email": "liani.agdan@vcdcph.com",
+    accessCode: ["HR-Admin", "Procurement", "Requestor", "View-ONLY"],
+    systemCode: ["ERM-DEV", "EMS-DEV", "TMS-DEV", "EMS-PROD"],
+    systemName: [
+      "Employee Records - DEV",
+      "Request Monitoring - DEV",
+      "Treasury Monitoring System - DEV",
+      "Request Monitoring",
+    ],
   },
   request: [
     {

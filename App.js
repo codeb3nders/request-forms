@@ -217,7 +217,7 @@ const App = () => {
     return <SkeletonLoaders />;
   }
 
-  if (state.user["Access"].length <= 0)
+  if (state.user.accessCode.length <= 0)
     return (
       <Grid
         container

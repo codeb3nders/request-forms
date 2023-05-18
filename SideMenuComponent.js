@@ -89,6 +89,9 @@ const MiniDrawer = (props) => {
     });
   };
 
+  const accessCode = user.accessCode.map((x) => x).join(" | ");
+  const systemName = user.systemName.map((x) => x).join(" | ");
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -114,8 +117,11 @@ const MiniDrawer = (props) => {
             <Typography variant="caption" display="block">
               {user["Name"]}
             </Typography>
-            <Typography variant="overline" display="block">
-              {user["System Code"]}
+            <Typography fontSize={8} variant="overline" display="block">
+              {systemName}
+            </Typography>
+            <Typography fontSize={8} variant="overline" display="block">
+              {accessCode}
             </Typography>
           </Grid>
         </Toolbar>
