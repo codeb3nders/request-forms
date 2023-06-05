@@ -35,17 +35,38 @@ const FormComponent = ({
       );
     });
   };
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+
   return (
     <Grid container spacing={2}>
       {Object.keys(fields).map((field) => {
         if (!fields[field].name) return;
         if (!fields[field].id.startsWith("rCR"))
           if (fields[field].type === "select") {
+            return (
+              <Grid key={field} item xs={4}>
+                <Autocomplete
+                  value={fields[field].value}
+                  // inputValue={inputValue}
+                  onInputChange={onChangeHandler}
+                  id="controllable-states-demo"
+                  options={fields[field].properties}
+                  sx={{ width: 300 }}
+                  required
+                 
+                  renderInput={(params) => (
+                    <TextField 
+                    {...params} 
+                    placeholder={fields[field].placeholder}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                    label={fields[field].label} 
+                    />
+                  )}
+                />
+              </Grid>
+            );
+          } else if (fields[field].type === "select-old") {
             return (
               <Grid key={field} item xs={4}>
                 <FormControl
@@ -110,6 +131,7 @@ const FormComponent = ({
             return (
               <Grid key={`tf${field}`} item xs={4}>
                 <TextField
+                  multiline={fields[field].multiline}
                   key={fields[field].id}
                   name={fields[field].name}
                   required={fields[field].required}
@@ -122,7 +144,7 @@ const FormComponent = ({
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  helperText={fields[field].error}
+                  // helperText={fields[field].error}
                   variant={fields[field].variant}
                   disabled={fields[field].disabled}
                   onChange={onChangeHandler}

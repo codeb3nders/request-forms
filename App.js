@@ -108,6 +108,8 @@ const App = () => {
     const id = e.target.id;
     const name = e.target.name;
 
+    console.log("====================================", id, name, e.target.value);
+
     const inSelect = ["category", "supplier", "project", "rCR02Status"];
 
     if (inSelect.includes(name)) {
@@ -142,8 +144,8 @@ const App = () => {
     //   "Vendor Name"
     // );
 
-    setData((prev) => {
-      return { rCR01FormFieldsDefaults };
+    setData(() => {
+      return {...rCR01FormFields}
     });
   };
 
@@ -157,6 +159,7 @@ const App = () => {
   };
 
   const handleSubmit = (e, stage) => {
+    console.log({ stage }, finalObj);
     const { user } = state;
 
     if (validateAllFields(RCRSchema, data, setData)) return;

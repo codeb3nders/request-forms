@@ -39,6 +39,7 @@ const rCR01FormFieldsDefaults = {
     label: "Particulars",
     placeholder: "Particulars",
     type: "standard",
+    multiline:true,
     required: true,
   },
 
@@ -98,6 +99,7 @@ const rCR01FormFieldsDefaults = {
     label: "PA Remarks",
     placeholder: "PA Remarks",
     type: "standard",
+    multiline:true,
     required: true,
   },
 
@@ -120,6 +122,7 @@ const rCR02FormFields = {
     label: "rCR02 Remarks",
     placeholder: "rCR02 Remarks",
     type: "string",
+    multiline:true,
     required: true,
   },
 };
@@ -133,6 +136,7 @@ const rCR03FormFields = {
     placeholder: "rCR03 Remarks",
     type: "string",
     required: true,
+    multiline:true,
   },
 };
 
@@ -260,6 +264,7 @@ const _rCR01FormFields = {
     name: "Particulars",
     label: "Particulars",
     placeholder: "Particulars",
+    multiline:true,
     type: "standard",
     required: true,
   },
@@ -320,6 +325,7 @@ const _rCR01FormFields = {
     label: "PA Remarks",
     placeholder: "PA Remarks",
     type: "standard",
+    multiline:true,
     required: true,
   },
 

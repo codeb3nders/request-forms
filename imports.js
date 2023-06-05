@@ -64,4 +64,5 @@ const {
   TableContainer,
   TableHead,
   TableRow,
+  Autocomplete
 } = MaterialUI;
