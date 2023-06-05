@@ -1,3 +1,5 @@
+
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -89,7 +91,9 @@ const MiniDrawer = (props) => {
     });
   };
 
-  const systemCode = user.systemCode.map((x) => x).join(" | ");
+  const systemCode = user.systemCode.map((x) => x).join(", ");
+  const systemName = user.systemName.map((x) => x).join(", ");
+  const accessCode = user.accessCode.map((x) => x).join(", ");
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -110,14 +114,14 @@ const MiniDrawer = (props) => {
             <Icon>menu</Icon>
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            Request Form
+            {systemName}
           </Typography>
           <Grid key="ls1" item xs={6} textAlign="right">
             <Typography variant="caption" display="block">
               {user["Name"]}
             </Typography>
             <Typography fontSize={8} variant="overline" display="block">
-              {systemCode}
+              {user["Employee   Company Email"]} | {accessCode}
             </Typography>
           </Grid>
         </Toolbar>
@@ -135,3 +139,5 @@ const MiniDrawer = (props) => {
     </Box>
   );
 };
+
+

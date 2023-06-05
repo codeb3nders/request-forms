@@ -145,7 +145,6 @@ function RequestListComponent() {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [selectedRecord, setSelectedRecord] = useState();
 
@@ -192,9 +191,7 @@ function RequestListComponent() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
+
 
   const updateForm = (row, stage) => {
     const systemName = user.systemName.map((x) => x).join(", ");
@@ -444,7 +441,7 @@ function RequestListComponent() {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size={"small"}
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -491,7 +488,7 @@ function RequestListComponent() {
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 33 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
@@ -510,10 +507,7 @@ function RequestListComponent() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+
       <DetailModalComponent title="Request Details">
         {selectedRecord ? (
           <RequestDetails user={user} record={selectedRecord} />
