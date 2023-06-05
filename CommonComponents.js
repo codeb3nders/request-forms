@@ -60,8 +60,7 @@ const FormComponent = ({
                   name={fields[field].id}
                   options={fields[field].properties}
                   sx={{ width: 300 }}
-                  required
-
+                  error={!!fields[field].error}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -70,6 +69,8 @@ const FormComponent = ({
                         shrink: true,
                       }}
                       label={fields[field].label}
+                      required={fields[field].required}
+                      error={!!fields[field].error}
                     />
                   )}
                 />

@@ -11,19 +11,29 @@ const RCRForm = (props) => {
   } = context;
 
   // Fill Dropdown values
-  if (state.variables)
-    rCR01FormFields.project.properties = prepareDropdownProperties(
-      state.variables,
-      "Locations",
-      "Locations"
-    );
+  // if (state.variables)
+  //   rCR01FormFields.project.properties = prepareDropdownProperties(
+  //     state.variables,
+  //     "Locations",
+  //     "Locations"
+  //   );
 
-  if (state.RFTType)
-    rCR01FormFields.category.properties = prepareDropdownProperties(
-      state.RFTType,
-      "Description",
-      "Description"
-    );
+  // if (state.RFTType)
+  //   rCR01FormFields.category.properties = prepareDropdownProperties(
+  //     state.RFTType,
+  //     "Description",
+  //     "Description"
+  //   );
+
+
+  // if (state.vendorsMaster) {
+  //   console.log("=====", state.vendorsMaster)
+  //   rCR01FormFieldsDefaults.supplier.properties = prepareDropdownProperties(
+  //     state.vendorsMaster,
+  //     "Vendor Name",
+  //     "Vendor Name"
+  //   );
+  // }
 
 
 

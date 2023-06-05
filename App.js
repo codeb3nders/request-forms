@@ -43,7 +43,29 @@ const App = () => {
         "Vendor Name"
       );
     }
-  }, [state.vendorsMaster]);
+
+    if (state.variables)
+      rCR01FormFields.project.properties = prepareDropdownProperties(
+        state.variables,
+        "Locations",
+        "Locations"
+      );
+
+    if (state.variables)
+      rCR01FormFields.terms.properties = prepareDropdownProperties(
+        state.variables,
+        "Terms",
+        "Terms"
+      );
+
+    if (state.RFTType)
+      rCR01FormFields.category.properties = prepareDropdownProperties(
+        state.RFTType,
+        "Description",
+        "Description"
+      );
+
+  }, [state.vendorsMaster, state.variables, state.RFTType]);
 
   const getAllData = async () => {
     await google.script.run
@@ -136,11 +158,11 @@ const App = () => {
       "Description"
     );
 
-    // rCR01FormFieldsDefaults.supplier.properties = prepareDropdownProperties(
-    //   state.vendorsMaster,
-    //   "Vendor Name",
-    //   "Vendor Name"
-    // );
+    rCR01FormFieldsDefaults.supplier.properties = prepareDropdownProperties(
+      state.vendorsMaster,
+      "Vendor Name",
+      "Vendor Name"
+    );
 
     setData(() => {
       return { ...rCR01FormFields }
