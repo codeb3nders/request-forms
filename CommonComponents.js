@@ -46,21 +46,30 @@ const FormComponent = ({
               <Grid key={field} item xs={4}>
                 <Autocomplete
                   value={fields[field].value}
-                  // inputValue={inputValue}
-                  onInputChange={onChangeHandler}
-                  id="controllable-states-demo"
+                  onChange={(event, newValue) => {
+                    const evnt = {
+                      target: {
+                        id: fields[field].id,
+                        name: fields[field].name,
+                        value: newValue.value
+                      }
+                    }
+                    onChangeHandler(evnt);
+                  }}
+                  id={fields[field].id}
+                  name={fields[field].id}
                   options={fields[field].properties}
                   sx={{ width: 300 }}
                   required
-                 
+
                   renderInput={(params) => (
-                    <TextField 
-                    {...params} 
-                    placeholder={fields[field].placeholder}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                    label={fields[field].label} 
+                    <TextField
+                      {...params}
+                      placeholder={fields[field].placeholder}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      label={fields[field].label}
                     />
                   )}
                 />
@@ -304,7 +313,7 @@ const ModalComponent = ({ buttonName, title, children }) => {
               style={{ marginBottom: 30 }}
               id="modal-modal-title"
               variant="h6"
-              // component="h2"
+            // component="h2"
             >
               {context.modalState.title ? context.modalState.title : title}
             </Typography>

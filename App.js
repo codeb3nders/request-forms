@@ -104,11 +104,9 @@ const App = () => {
     });
   };
 
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e, c) => {
     const id = e.target.id;
     const name = e.target.name;
-
-    console.log("====================================", id, name, e.target.value);
 
     const inSelect = ["category", "supplier", "project", "rCR02Status"];
 
@@ -145,7 +143,7 @@ const App = () => {
     // );
 
     setData(() => {
-      return {...rCR01FormFields}
+      return { ...rCR01FormFields }
     });
   };
 
@@ -159,8 +157,10 @@ const App = () => {
   };
 
   const handleSubmit = (e, stage) => {
-    console.log({ stage }, finalObj);
+
     const { user } = state;
+
+
 
     if (validateAllFields(RCRSchema, data, setData)) return;
 
@@ -173,15 +173,15 @@ const App = () => {
 
     if (stage === 1) {
       finalObj["rCR02Status"] = "Approved";
-      finalObj["rCR02Approver"] = user["Company Email"];
+      finalObj["rCR02Approver"] = user["Employee Company Email"];
       finalObj["rCR02DateApproved"] = new Date().toLocaleDateString();
     } else if (stage === 2) {
       finalObj["rCR03Status"] = "Approved";
-      finalObj["rCR03Approver"] = user["Company Email"];
+      finalObj["rCR03Approver"] = user["Employee Company Email"];
       finalObj["rCR03DateApproved"] = new Date().toLocaleDateString();
     } else if (stage === 3) {
       finalObj["rCR04Status"] = "Approved";
-      finalObj["rCR04Approver"] = user["Company Email"];
+      finalObj["rCR04Approver"] = user["Employee Company Email"];
       finalObj["rCR04DateApproved"] = new Date().toLocaleDateString();
     }
     console.log({ finalObj });

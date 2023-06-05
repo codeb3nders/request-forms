@@ -7,12 +7,15 @@ function validateEntry(schema, id, value) {
 }
 
 function validateAllFields(schema, data, setData) {
+
   const validate = Object.keys(data)
     .map((field) => {
       const response = validateEntry(schema, data[field].id, data[field].value);
       return response && { [field]: response };
     })
     .filter(Boolean);
+
+
 
   let errors = {};
 

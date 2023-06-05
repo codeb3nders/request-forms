@@ -13,7 +13,7 @@ function RequestListComponent() {
   const { user, request, isLoading } = state;
 
   const userOnly = request.filter(
-    (row) => row.submittedBy === 'user["Company Email"]'
+    (row) => row.submittedBy === user["Employee Company Email"]
   );
 
   const rows = setAllowedAccess(state.user, [
