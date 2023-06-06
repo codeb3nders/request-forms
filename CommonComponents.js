@@ -310,6 +310,13 @@ const ModalComponent = ({ buttonName, title, children }) => {
           autoComplete="off"
         >
           <Box sx={style}>
+            <div style={{ position: 'absolute', top: 0, right: 0 }}>
+              <IconButton color="primary" aria-label="upload picture" component="span"
+                onClick={context.handleCancel}              >
+                <Icon>close</Icon>
+              </IconButton>
+            </div>
+
             <Typography
               style={{ marginBottom: 30 }}
               id="modal-modal-title"
@@ -339,6 +346,13 @@ const DetailModalComponent = ({ title, children }) => {
       >
         <Box>
           <Box sx={style}>
+            <div style={{ position: 'absolute', top: 0, right: 0 }}>
+              <IconButton color="primary" aria-label="upload picture" component="span"
+                onClick={context.handleCancel}              >
+                <Icon>close</Icon>
+              </IconButton>
+            </div>
+
             <Typography id="modal-modal-title" variant="h6">
               {title}
             </Typography>
@@ -358,3 +372,46 @@ const Amount = (number, currency = "PHP") => {
 
   return number ? PhilPeso.format(number) : PhilPeso.format(0);
 };
+
+const Denied = ({ children, title }) => {
+  return (
+
+    <Grid
+      container
+      marginTop={5}
+      padding={2}
+      textAlign="center"
+      justifyContent="center"
+      alignItems="center"
+      justify="center"
+      style={{ height: "70vh" }}
+    >
+      <Grid key={"fg"} item xs={7}
+        textAlign={'start'} borderRadius={2} fontSize={30} backgroundColor="#f5f5f5">
+        <Grid padding={1} paddingLeft={2.5} item fontSize={20} textTransform="uppercase" backgroundColor='#dddddd'>
+          {title ? title : "Access Denied"}
+        </Grid>
+        <Grid margin={2} item fontSize={18}>
+          {children}
+        </Grid>
+      </Grid>
+    </Grid>
+  )
+}
+
+const Restricted = ({ children, accessCode }) => {
+  const context = useContext(ApplicationContext);
+  const user = context.state.user;
+
+  if (setAllowedAccess(user, accessCode)) {
+    return children;
+  } else {
+    return (
+      <Denied>
+        <p> The page you are trying to access has restricted access or it is temporarily down for maintenace. Please refer to your it support for more information.</p>
+      </Denied>
+    )
+  }
+}
+
+

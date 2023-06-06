@@ -91,9 +91,9 @@ const MiniDrawer = (props) => {
     });
   };
 
-  const systemCode = user.systemCode.map((x) => x).join(", ");
-  const systemName = user.systemName.map((x) => x).join(", ");
-  const accessCode = user.accessCode.map((x) => x).join(", ");
+  // const systemCode = user.systemCode.map((x) => x).join(", ");
+  const systemName = user && user.systemName.map((x) => x).join(", ");
+  const accessCode = user && user.accessCode.map((x) => x).join(", ");
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -114,14 +114,14 @@ const MiniDrawer = (props) => {
             <Icon>menu</Icon>
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {systemName}
+            {user ? systemName : 'RCR-DEV'}
           </Typography>
           <Grid key="ls1" item xs={6} textAlign="right">
             <Typography variant="caption" display="block">
-              {user["Name"]}
+              {user && user["Name"]}
             </Typography>
             <Typography fontSize={8} variant="overline" display="block">
-              {user["Employee   Company Email"]} | {accessCode}
+              {user && user["Employee Company Email"]} | {accessCode}
             </Typography>
           </Grid>
         </Toolbar>

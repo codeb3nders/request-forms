@@ -71,8 +71,8 @@ const SampleState = {
     Access: "HR-Admin",
     Location: "HEAD OFFICE",
     "Email (Manual Input)": "",
-    "Employee Company Email": "liani.agdan@vcdcph.com",
-    accessCode: ["HR-Admin", "Procurement", "Requestor", "View-ONLY"],
+    "Employee Company Email": "liani.agdan@vcdcphx.com",
+    accessCode: [],
     systemCode: ["ERM-DEV", "EMS-DEV", "TMS-DEV", "EMS-PROD"],
     systemName: [
       "Employee Records - DEV",

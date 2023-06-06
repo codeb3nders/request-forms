@@ -242,26 +242,23 @@ const App = () => {
     return <SkeletonLoaders />;
   }
 
-  if (state.user.accessCode.length <= 0)
-    return (
-      <Grid
-        container
-        backgroundColor="#f5f5f5"
-        spacing={2}
-        marginTop={5}
-        padding={2}
-      >
-        <Grid key={"fg"} item xs={12} textAlign="center" fontSize={30}>
-          User not allowed!
-        </Grid>
-      </Grid>
-    );
 
   return (
     <ApplicationContext.Provider value={contextValue}>
       <LayoutComponent>
-        {RenderForm()}
-        <RequestListComponent />
+        <Restricted accessCode={[
+          APPROVER_QS,
+          APPROVER_ACTG,
+          TREASURY,
+          VIEW_ONLY,
+          PROCUREMENT,
+          APPROVER_SHE,
+          HR_ADMIN,
+          REQUESTOR
+        ]}>
+          {RenderForm()}
+          <RequestListComponent />
+        </Restricted>
       </LayoutComponent>
     </ApplicationContext.Provider>
   );

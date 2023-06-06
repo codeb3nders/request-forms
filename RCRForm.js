@@ -39,13 +39,23 @@ const RCRForm = (props) => {
 
   return (
     <ModalComponent buttonName={props.buttonName} title={props.title}>
-      <FormComponent
-        fields={rCR01FormFields}
-        data={data}
-        onChangeHandler={onChangeHandler}
-        handleCancel={handleCancel}
-        handleSubmit={handleSubmit}
-      />
+      <Restricted accessCode={[
+        APPROVER_QS,
+        APPROVER_ACTG,
+        TREASURY,
+        PROCUREMENT,
+        APPROVER_SHE,
+        HR_ADMIN,
+        REQUESTOR]}>
+        <FormComponent
+          fields={rCR01FormFields}
+          data={data}
+          onChangeHandler={onChangeHandler}
+          handleCancel={handleCancel}
+          handleSubmit={handleSubmit}
+        />
+      </Restricted>
+
     </ModalComponent>
   );
 };
