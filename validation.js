@@ -40,3 +40,5 @@ function validateAllFields(schema, data, setData) {
 
   return validate.length > 0;
 }
+
+// Path: index.js
